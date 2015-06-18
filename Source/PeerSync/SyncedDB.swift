@@ -124,10 +124,12 @@ public class SyncedDB : Printable {
     // Subroutine to construct the peer's database's URL:
     private func makeURL(hostName: String) -> NSURL {
         var components = NSURLComponents()
-        components.scheme = "https" //WORKAROUND: Use "https" once it's working on the listener side
+        components.scheme = "http" //WORKAROUND: Use "https" once it's working on the listener side
         components.host = hostName
         components.port = peer.port
         components.path = "/" + db.name
+        components.user = "testUser"
+        components.password = "aStrongPassword123"
         return components.URL!
     }
 

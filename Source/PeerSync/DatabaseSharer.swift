@@ -38,11 +38,13 @@ public class DatabaseSharer {
         listener.setBonjourName(serviceName, type: DatabaseSharer.kServiceType)
         //listener.readOnly = true
         /* WORKAROUND: This doesn't work with CBL 1.1 (clients reject the cert as invalid: #724)
-        }*/
-
         if !listener.setAnonymousSSLIdentityWithLabel("peersync", error: outError) {
-            return nil
-        }
+        return nil
+        }*/
+        
+        listener.requiresAuth = true
+        listener.setPasswords(["testUser": "aStrongPassword123"])
+
 
         println("DatabaseSharer: Service name is '\(serviceName)'")
 
