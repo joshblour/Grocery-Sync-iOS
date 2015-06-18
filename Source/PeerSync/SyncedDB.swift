@@ -82,7 +82,7 @@ public class SyncedDB : Printable {
                 // Got the hostname, now start the replication:
                 self.sequenceBeingSynced = self.latestSequenceSeen
                 let url = self.makeURL(hostName)
-                let pull = self.db.createPullReplication(url)!
+                let pull = self.db.createPullReplication(url)
                 println("\(self): Pulling from <\(url)>")
                 self.currentPull = pull
                 self.pullObs = pull.observe(keyPath: "status") { [unowned self] in
@@ -124,7 +124,7 @@ public class SyncedDB : Printable {
     // Subroutine to construct the peer's database's URL:
     private func makeURL(hostName: String) -> NSURL {
         var components = NSURLComponents()
-        components.scheme = "http" //WORKAROUND: Use "https" once it's working on the listener side
+        components.scheme = "https" //WORKAROUND: Use "https" once it's working on the listener side
         components.host = hostName
         components.port = peer.port
         components.path = "/" + db.name
